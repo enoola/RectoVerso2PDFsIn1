@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b79370509484161c23a908ed08b51b9e",
+    "content-hash": "6bd4198f6f87df3416f57a39ad6e8075",
     "packages": [
         {
             "name": "setasign/eval/setapdf-core/ioncube",
-            "version": "1.0.2216217",
+            "version": "1.0.2216295",
             "dist": {
                 "type": "zip",
                 "url": "https://www.setasign.com/downloads/eval/54918/ioncube/SetaPDF-Core-License.zip"

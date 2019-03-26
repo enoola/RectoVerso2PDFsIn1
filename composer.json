@@ -1,5 +1,5 @@
 {
-  "name": "phpeteur/rectoverso2pdfsin1",
+  "name": "phpeteur/crectoverso2pdfsin1",
   "description":"Fusion 2 PDFs in 1 My Scanner's document feeder doesn't support recto verso scanning...",
   "license":"MIT",
   "require": {
@@ -15,7 +15,7 @@
   ],
   "autoload": {
      "psr-4": {
-        "PhPeteur\\FusionPDFs\\": "src/PhPeteur/FusionPDFs"
+        "PhPeteur\\": "src/PhPeteur"
      }
   }
 }
