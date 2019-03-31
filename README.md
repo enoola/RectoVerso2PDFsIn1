@@ -61,8 +61,8 @@ By the way my configure line is a bit different, I removed apxs since I only do 
 
 ```
 $./configure  
-  --prefix=/usr/local/mac-dev-env/php-7.2.11  \
-  --with-config-file-path=/usr/local/mac-dev-env/php-7.2.11/etc \  
+  --prefix=/usr/local/mac-dev-env/php  \
+  --with-config-file-path=/usr/local/mac-dev-env/php/etc \  
   --enable-bcmath \
   --enable-mbstring \
   --enable-sockets \
@@ -82,10 +82,20 @@ $./configure
   --with-zlib
 ```
 
-Once article followed you should have php 7.2 installed in mac-dev-env and a symbolic link to it in /usr/local  
+You might get an ERROR  while launching ./configure
+When Launching `./configure ...` you might have an error :  
 
 ```
-ls -l /usr/local/mac-dev-env/php-7.2.11/
+xcrun: error: invalid active developer path (/Library/Developer/
+CommandLineTools), missing xcrun
+```
+If so you are missing some headers/libraries, in order to install it type : xcode-select --install  
+cf: https://tips.tutorialhorizon.com/2015/10/01/xcrun-error-invalid-active-developer-path-library-developer-commandline-tools-missing-xcrun/ 
+
+Once article followed you should have php 7.2 installed in mac-dev-env and a symbolic link to it in /usr/local/php  
+
+```
+$ls -l /usr/local/mac-dev-env/php/
 total 0
 drwxr-xr-x  12 enola  staff  384 Mar 28 06:05 bin
 drwxr-xr-x   4 enola  staff  128 Mar 28 06:19 etc
@@ -94,6 +104,12 @@ drwxr-xr-x   3 enola  staff   96 Mar 28 06:05 lib
 drwxr-xr-x   3 enola  staff   96 Mar 28 06:05 php
 drwxr-xr-x   4 enola  staff  128 Mar 28 06:05 var
 ```
+```
+$ls -l /usr/local/php
+lrwxr-xr-x  1 root  wheel  22 Mar 28 06:35 /usr/local/php7.2.11 -> mac-dev-env/php
+```
+
+
 
 ##### 1.2.3 make php loads ioncube 
 
