@@ -9,3 +9,4 @@ config.yml
 passedusers
 auth.json
 composer.lock
+example_output.pdf
