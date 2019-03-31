@@ -8,9 +8,6 @@
 
 namespace PhPeteur\Fusion2PDFs;
 
-use SetaPDF_Core;
-use SetaPDF_Core_Writer;
-use SetaPDF_Core_Writer_FileInterface;
 use SetaPDF_Core_Document;
 
 
@@ -32,10 +29,19 @@ class RectoVerso2PDFsIn1
         $this->_bEraseOutputIfExists = $bEraseOutputIfExists;
     }
 
+    //run : do the assembling
+    //returns array with :
+    //   status : boolean representing if they were failure
+    //   verbose : understandable output
+    //   errormsg : present if an error occured (in which case status is likely to be set to false)
     public function run()
     {
+        //results commited to an array in order to be passed to the invoker
         $arResult = array();
         $arResult['status'] = false;
+
+        // Testing  arguments
+        // If file exists
         if ( (!file_exists($this->_PDFVerso)) || (!file_exists($this->_PDFRecto)) ) {
             $arResult['errormsg'] = 'One of the input PDF is missing.';
             return ($arResult);
@@ -50,7 +56,7 @@ class RectoVerso2PDFsIn1
             $arResult['status'] = true;
         }
 
-        //echo "will load : SetaPDF_Core_Document " . $this->_PDFRecto . PHP_EOL;
+        //Load file containing recto
         $objPDFRecto = SetaPDF_Core_Document::loadByFilename($this->_PDFRecto);
         //Get pages on recto
         $pagesRecto = $objPDFRecto->getCatalog()->getPages();
@@ -66,16 +72,19 @@ class RectoVerso2PDFsIn1
         if ((int)$this->_PDFVersoNbPageToConsider >(int)$pageRectoCount ) {
             $this->_PDFVersoNbPageToConsider = $pageRectoCount;
         }
-        $objPDFVerso = SetaPDF_Core_Document::loadByFilename($this->_PDFVerso);
 
+        //Load file containing verso
+        $objPDFVerso = SetaPDF_Core_Document::loadByFilename($this->_PDFVerso);
 
         //Prepare output document (Writer, CoreDoc)
         $oPDFWriter = new \SetaPDF_Core_Writer_File( $this->_PDFOutput );
         $oPDFOutput = new SetaPDF_Core_Document( );
         $oPDFOutput->setWriter( $oPDFWriter );
 
+        //Object representing output pages to which we will append our documents (recto+verso)
         $pagesPDFOutputToAppend = $oPDFOutput->getCatalog()->getPages();
 
+        //Object containing pages on verso PDF doc
         $pagesVerso = $objPDFVerso->getCatalog()->getPages();
         $arResult['verbose'][]= "Number of pages on recto document   : " . $pageRectoCount;
         $arResult['verbose'][]= "Number of pages to append from verso : " . $this->_PDFVersoNbPageToConsider;

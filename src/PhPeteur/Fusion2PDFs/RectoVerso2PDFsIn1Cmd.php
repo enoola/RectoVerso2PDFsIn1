@@ -21,8 +21,11 @@ class RectoVerso2PDFsIn1Cmd extends Command
     {
 
         $this->setName('rectoverso2pdfsin1'); //smart recto verso converge maybe ?
-        $this->setDescription("Fusion 2 PDFs in 1 My Scanner's document feeder doesn't support recto verso scanning...");
-        //$this->addOption('pdfrecto', null,InputOption::VALUE_NONE,'pdf recto path.');
+        $this->setDescription("Fusion 2 PDFs in 1, y scanner's document feeder doesn't support recto verso scanning...");
+
+        //Add arguments and option to our command
+        //Usage : rectoverso2pdfsin1 [options] [--] <pdfrecto> <pdfverso> <pdfoutput> [<numpageverso>]
+
         $this->addArgument('pdfrecto', InputArgument::REQUIRED,'pdf recto path.');
         $this->addArgument('pdfverso', InputArgument::REQUIRED,'pdf verso path.');
         $this->addArgument('pdfoutput', InputArgument::REQUIRED,'output PDF file name.');
@@ -30,11 +33,10 @@ class RectoVerso2PDFsIn1Cmd extends Command
         $this->addOption('forcerewriteoutput', null,InputOption::VALUE_NONE,'rewrite output file if exists, 0 by default.');
     }
 
-    
+
     function go(InputInterface $input, OutputInterface $output)
     {
         $bRewriteOutputIfExists = $input->getOption('forcerewriteoutput');
-
 
         $oRVPDFs = new RectoVerso2PDFsIn1($input->getArgument('pdfrecto'),
             $input->getArgument('pdfverso'),
@@ -66,16 +68,8 @@ class RectoVerso2PDFsIn1Cmd extends Command
 
         try {
             $this->go($input, $output);
-            //$ret = $this->myRun($input, $output);
-            //$output->writeln('run RectoVerso2PDFsIn1');
-
-            /*if ($output->isVerbose()) {
-                $output->writeln("Verbose invoked...");
-                var_dump($ret);
-            }*/
 
         } catch (QueryException $e) {
-            //$output->write();
             var_dump($e);
         }
 

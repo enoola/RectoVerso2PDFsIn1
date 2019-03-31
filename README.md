@@ -4,6 +4,8 @@ Script wrote in order to assemble 2 PDFs in 1 my Scanner's document feeder doesn
 
 I wrote the script on Mac Os X Mojave 10.14.2
 
+![recto verso](https://manuals.konicaminolta.eu/bizhub-PRESS-C1100-C1085/FR/contents/img/OPI/C1070-C1060-C1060L_MEN008091B.png)
+
 Prerequisites :  
 
  1. PhP 7.2 that supports ioncube  
@@ -39,7 +41,7 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
     with the ionCube PHP Loader v10.3.2, Copyright (c) 2002-2018, by ionCube Ltd.
 ```
 
-If you have the above please proceed to `xx Download and run the script`
+If you have the above please proceed to `How to use` section
 
 #### 1.2 Compile and configure PhP 7.2
 
@@ -145,7 +147,7 @@ $ ls -l /usr/local/ioncube
 -rw-r--r--@ 1 root  wheel  1466264 Mar 27 08:57 ioncube_loader_dar_7.2.so
 ```
 
-d. Tell PhP to load ioncube when invoked
+d. Modify php.ini for PhP to load ioncube when invoked
 
 Open /usr/local/php/etc/php.ini
 Add this line :
@@ -316,7 +318,8 @@ Well not bad nevertheless we would like a 3 pages PDF, see below.
 We will tell `rectoverso2pdfsin1` to only take 1 page on the verso (where the is two) this is achieved by puting the number of page to keep on recto after output filename
 
 ```
-$ /usr/local/php/bin/php -c php.ini.example console.php rectoverso2pdfsin1 -v example_recto.pdf example_verso.pdf example_output.pdf 1
+$ /usr/local/php/bin/php -c php.ini.example console.php rectoverso2pdfsin1 -v \
+example_recto.pdf example_verso.pdf example_output.pdf 1
 ```
 ```
 Output PDF exists already add option --forcerewriteoutput.
@@ -329,8 +332,8 @@ No worries this is because the output file you have given already exists.
 Below is how to force rewriting the output file if exists already.
 
 ```
-$ /usr/local/php/bin/php -c php.ini.example console.php \
-rectoverso2pdfsin1 -v example_recto.pdf example_verso.pdf example_output.pdf 1 --forcerewriteoutput
+$ /usr/local/php/bin/php -c php.ini.example console.php rectoverso2pdfsin1 \
+-v example_recto.pdf example_verso.pdf example_output.pdf 1 --forcerewriteoutput
 ```
 
 ```
