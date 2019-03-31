@@ -8,3 +8,4 @@ config.yml
 *.csv
 passedusers
 auth.json
+composer.lock
