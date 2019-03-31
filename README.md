@@ -4,15 +4,18 @@ Script wrote in order to assemble 2 PDFs in 1 my Scanner's document feeder doesn
 
 I wrote the script on Mac Os X Mojave 10.14.2
 
-Pre-requisite :  
+Prerequisites :  
 
  1. PhP 7.2 that supports ioncube  
  2. A license (even trial) of SetaPDF-Core    
 
-How to use :
- 1. clone and setup git Repository
- 2. First launch
- 3. Examples
+How to use : 
+
+ 1. clone and setup git Repository  
+ 2. First launch  
+ 3. Examples. 
+
+# Prerequisites
 
 ##1. PhP 7.2 that supports ioncube  
 #### 1.1 Check your php config
@@ -24,7 +27,7 @@ Copyright (c) 1997-2018 The PHP Group
 Zend Engine v3.1.0, Copyright (c) 1998-2018 Zend Technologies
 ```
 
-If you have the above, which is not good, please jump to 1.2 
+If you have the above, without ioncube mentionned, which is not good, please jump to `1.2 Compile and configure PhP 7.2` 
 
 Expected output is has below :  
 
@@ -36,7 +39,7 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
     with the ionCube PHP Loader v10.3.2, Copyright (c) 2002-2018, by ionCube Ltd.
 ```
 
-If you have the above please proceed to 'xx Download and run the script'
+If you have the above please proceed to `xx Download and run the script`
 
 #### 1.2 Compile and configure PhP 7.2
 
@@ -137,6 +140,8 @@ c. Create a folder named ioncube in /usr/local and copy the right lib
 $ sudo mkdir /usr/local/ioncube
 $ sudo cp ~/Downloads/ioncube/ioncube_loader_dar_7.2.so /usr/local/ioncube/
 $ ls -l /usr/local/ioncube
+```
+```
 -rw-r--r--@ 1 root  wheel  1466264 Mar 27 08:57 ioncube_loader_dar_7.2.so
 ```
 
@@ -147,14 +152,15 @@ Add this line :
 `zend_extension="/usr/local/ioncube/ioncube_loader_dar_7.2.so" `  
 Save and Close
 
-You can also find an example with this line included in php.ini.example,  
+You can also find an example with this line included in `php.ini.example`,  
 this is only a sample took after compilation (0 optimization at all)
 
 e. Verify PhP loads ioncube extension
 
 ```
-$/usr/local/php/bin/php -c /usr/local/php7.2.11/etc/php.ini -v
-
+$/usr/local/php/bin/php -c /usr/local/php/etc/php.ini -v
+```
+```
 PHP 7.2.11 (cli) (built: Mar 27 2019 23:01:35) ( NTS )  
 Copyright (c) 1997-2018 The PHP Group  
 Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies  
@@ -165,17 +171,18 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
 As told earlier we are using setaPDF-Core to assemble our PDF, this lib is made available by Setassign which isn't free unfortunately. Nevertheless you can ask for a 14 days trial to make up your mind. Good news is that we only need the core peace which is the less expensive one.
 
 #### 2.1 Create an account at setassign
-a. Go To https://www.setasign.com/register
-b. Create an account
-c. Once done go to https://www.setasign.com/ and login
-d. Go to : https://www.setasign.com/products/setapdf-core/evaluate/
-e. Click on "Request evaluation License"
-f. Go to : https://www.setasign.com/products/setapdf-core/downloads/
+a. Go To https://www.setasign.com/register  
+b. Create an account  
+c. Once done go to https://www.setasign.com/ and login  
+d. Go to : https://www.setasign.com/products/setapdf-core/evaluate/  
+e. Click on "Request evaluation License"  
+f. Go to : https://www.setasign.com/products/setapdf-core/downloads/  
 
 
+# How to use
 
-##3. Clone and setup Git repo. `rectoverso2pdfsin1` 
-#### 3.1 Download the git project
+##1. Clone and setup Git repo. `rectoverso2pdfsin1` 
+#### 1.1 Download the git project
 a. Go to the folder where you wish to download 
 
 ```
@@ -218,7 +225,7 @@ Generating autoload files
 
 
 
-## 4. First Launch
+## 2. First Launch
 
 We will invoke our script and see help
 
@@ -249,7 +256,7 @@ Options:
   -v|vv|vvv, --verbose      Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 ```
 
-## 5. Examples
+## 3. Examples
 
 In order to fast try we have some files :
 `example_recto.pdf`, `example_verso.pdf` : which represents a 3 pages document  
@@ -271,15 +278,17 @@ Ultimately we want a PDF with 3 pages, so expected output is as below :
 | Page 3     |
 
 
-#### 5.1 Assemble 2 PDFs
+#### 3.1 Assemble 2 PDFs
 
-##### 5.1.1 Fastest way
+##### 3.1.1 Fastest way
 We will assemble our examples with the minimum argument possible with only `-v` for it to be verbose
 I assume you are in the folder where you downloaded this project
 
 ```
-$ /usr/local/php/bin/php -c php.ini.example console.php rectoverso2pdfsin1 example_recto.pdf example_verso.pdf example_output.pdf -v
+$ /usr/local/php/bin/php -c php.ini.example console.php rectoverso2pdfsin1 \
+ example_recto.pdf example_verso.pdf example_output.pdf -v
 ```
+
 ```
 Number of pages on recto document   : 2
 Number of pages to append from verso : 2
@@ -302,7 +311,7 @@ Now open the resulting file, it will look like the below :
 
 Well not bad nevertheless we would like a 3 pages PDF, see below.
 
-##### 5.1.1 Define number of pages to take on verso 
+##### 3.1.2 Define number of pages to take on verso 
 
 We will tell `rectoverso2pdfsin1` to only take 1 page on the verso (where the is two) this is achieved by puting the number of page to keep on recto after output filename
 
@@ -315,7 +324,7 @@ Output PDF exists already add option --forcerewriteoutput.
 
 No worries this is because the output file you have given already exists.
 
-##### 5.1.2 Forcerewrite output file if already exists
+##### 3.1.3 Forcerewrite output file if already exists
 
 Below is how to force rewriting the output file if exists already.
 

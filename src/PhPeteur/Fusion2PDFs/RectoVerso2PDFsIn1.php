@@ -110,7 +110,7 @@ class RectoVerso2PDFsIn1
             $arResult['errormsg'] = "File " . $this->_PDFOutput . ' not created.';
             $arResult['status'] = false;
         }
-        //var_dump($arResult);
+
         return ( $arResult );
     }
 

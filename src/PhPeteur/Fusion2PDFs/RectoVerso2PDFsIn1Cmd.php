@@ -30,11 +30,9 @@ class RectoVerso2PDFsIn1Cmd extends Command
         $this->addOption('forcerewriteoutput', null,InputOption::VALUE_NONE,'rewrite output file if exists, 0 by default.');
     }
 
-    //should be dorun
+    
     function go(InputInterface $input, OutputInterface $output)
     {
-        //$output->writeln('<red>Do Run involved</red>');
-
         $bRewriteOutputIfExists = $input->getOption('forcerewriteoutput');
 
 
