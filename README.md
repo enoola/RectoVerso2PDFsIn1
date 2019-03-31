@@ -19,7 +19,7 @@ How to use :
 
 # Prerequisites
 
-##1. PhP 7.2 that supports ioncube  
+## 1. PhP 7.2 that supports ioncube  
 #### 1.1 Check your php config
 
 ```
@@ -185,8 +185,10 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
     with the ionCube PHP Loader v10.3.2, Copyright (c) 2002-2018, by ionCube Ltd.    
 ```
 
-##2. A license (even trial) of SetaPDF-Core
-As told earlier we are using setaPDF-Core to assemble our PDF, this lib is made available by Setassign which isn't free unfortunately. Nevertheless you can ask for a 14 days trial to make up your mind. Good news is that we only need the core peace which is the less expensive one.
+## 2. A license (even trial) of SetaPDF-Core  
+As told earlier we are using setaPDF-Core to assemble our PDF, this lib is made available by Setassign which isn't free unfortunately.  
+Nevertheless you can ask for a 14 days trial to make up your mind.  
+Good news is that we only need the core peace which is the less expensive one.
 
 #### 2.1 Create an account at setassign
 a. Go To https://www.setasign.com/register  
@@ -199,7 +201,7 @@ f. Go to : https://www.setasign.com/products/setapdf-core/downloads/
 
 # How to use
 
-##1. Clone and setup Git repo. `rectoverso2pdfsin1` 
+## 1. Clone and setup Git repo. `rectoverso2pdfsin1` 
 #### 1.1 Download the git project
 a. Go to the folder where you wish to download 
 
