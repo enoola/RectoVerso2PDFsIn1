@@ -4,6 +4,7 @@ namespace PhPeteur\Fusion2PDFs;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -18,24 +19,43 @@ class RectoVerso2PDFsIn1Cmd extends Command
 
     protected function configure()
     {
-        $this->_PDFsInOne = null;
 
         $this->setName('rectoverso2pdfsin1'); //smart recto verso converge maybe ?
         $this->setDescription("Fusion 2 PDFs in 1 My Scanner's document feeder doesn't support recto verso scanning...");
-        $this->addOption('pdfrecto', null,InputOption::VALUE_NONE,'pdf recto path.');
-        $this->addOption('pdfverso', null,InputOption::VALUE_NONE,'pdf verso path.');
-        $this->addOption('numpageverso', null,InputOption::VALUE_NONE,'number of pages on verso to take and add.');
-
+        //$this->addOption('pdfrecto', null,InputOption::VALUE_NONE,'pdf recto path.');
+        $this->addArgument('pdfrecto', InputArgument::REQUIRED,'pdf recto path.');
+        $this->addArgument('pdfverso', InputArgument::REQUIRED,'pdf verso path.');
+        $this->addArgument('pdfoutput', InputArgument::REQUIRED,'output PDF file name.');
+        $this->addArgument('numpageverso', InputArgument::OPTIONAL,'number of pages on verso to take and add.');
+        $this->addOption('forcerewriteoutput', null,InputOption::VALUE_NONE,'rewrite output file if exists, 0 by default.');
     }
 
-    protected function doRun(InputInterface $input, OutputInterface $output) : array
+    //should be dorun
+    function go(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('<red>Do Run involved</red>');
+        //$output->writeln('<red>Do Run involved</red>');
 
-        //$this->_PDFsInOne = new RectoVerso2PDFsIn1('');
-        //$arInterestingParams = [];
+        $bRewriteOutputIfExists = $input->getOption('forcerewriteoutput');
 
-        return (array());
+
+        $oRVPDFs = new RectoVerso2PDFsIn1($input->getArgument('pdfrecto'),
+            $input->getArgument('pdfverso'),
+            $input->getArgument('pdfoutput'),
+            $input->getArgument('numpageverso'),
+            $input->getOption('forcerewriteoutput') );
+
+        $arResult = $oRVPDFs->run();
+        if ($arResult['status'] == false)
+        {
+            $output->writeln('<red>' . $arResult['errormsg'] . '</red>');
+            return ( false );
+        }
+
+        if ($output->isVerbose())
+            foreach($arResult['verbose'] as $line)
+                $output->writeln('<green>' . $line . '</green>');
+
+        return ( true );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -47,16 +67,18 @@ class RectoVerso2PDFsIn1Cmd extends Command
         }
 
         try {
-            //$ret = $this->doRun($input, $output);
-            $output->writeln('run RectoVerso2PDFsIn1');
+            $this->go($input, $output);
+            //$ret = $this->myRun($input, $output);
+            //$output->writeln('run RectoVerso2PDFsIn1');
 
-            if ($output->isVerbose()) {
+            /*if ($output->isVerbose()) {
                 $output->writeln("Verbose invoked...");
                 var_dump($ret);
-            }
+            }*/
 
         } catch (QueryException $e) {
-            $output->write(json_encode($e->getResponse(), JSON_PRETTY_PRINT));
+            //$output->write();
+            var_dump($e);
         }
 
     }
