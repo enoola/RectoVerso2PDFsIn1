@@ -196,8 +196,8 @@ b. Create an account
 c. Once done go to https://www.setasign.com/ and login  
 d. Go to : https://www.setasign.com/products/setapdf-core/evaluate/  
 e. Click on "Request evaluation License"  
-f. Go to : https://www.setasign.com/products/setapdf-core/downloads/  
-
+  
+Download will append below when cloning git repository.
 
 # How to use
 
@@ -217,7 +217,8 @@ $ cd RectoVerso2PDFsIn1
 c. Install the dependencies with composer
 
 ```
-$ /usr/local/php/bin/php composer install
+$ /usr/local/php/bin/php composer install  
+At this point you be probably asked to enter setasign credentials
 
 Deprecation warning: require.setasign/eval/setapdf-core/ioncube/php7.1 is invalid, it should have a vendor name, a forward slash, and a package name. The vendor and package name can be words separated by -, . or _. The complete name should match "[a-z0-9]([_.-]?[a-z0-9]+)*/[a-z0-9]([_.-]?[a-z0-9]+)*". Make sure you fix this as Composer 2.0 will error.
 Loading composer repositories with package information
